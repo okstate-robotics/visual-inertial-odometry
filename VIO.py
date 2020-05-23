@@ -32,9 +32,14 @@ class Hansel:
         self.GT_is_comming = False
         self.bridge = CvBridge()
         self.df = pd.DataFrame(columns=['pointNum','x', 'y', 'patch','rotation','translation','frameNum','groundtruth'])
+
+        self.RTdf = pd.DataFrame(columns=['rotation','translation','frameNum','groundtruth'])
         self.startTime = 0
         self.landmarks = pd.DataFrame(columns=['pointNum','x', 'y','frameNum'])
         self.perceptionDF = pd.DataFrame(columns=['frameNum','difx', 'dify','imu angular velocity','imu linear velocity','groundtruth'])
+        self.RT_IMU_GT_DF = pd.DataFrame(
+            columns=['frameNum', 'rotation','translation', 'imu angular velocity', 'imu linear velocity', 'groundtruth'])
+
         self.patchsize = 4
         self.cfpatchs = np.array(16)
         self.lfpatchs = np.array(16)
@@ -58,11 +63,46 @@ class Hansel:
         rospy.Subscriber("/imu0", Imu, self.IMU_callback)
         #rospy.Subscriber("/cam0/image_raw", Imu, self.image_callback)
     def savetoCSV(self):
-        self.df.to_csv('file_name2', encoding='utf-8', index=False)
+        #self.df.to_csv('file_name2', encoding='utf-8', index=False)
 
-        self.perceptionDF.to_csv('perception', encoding='utf-8', index=False)
+        #self.perceptionDF.to_csv('perception', encoding='utf-8', index=False)
+        self.RT_IMU_GT_DF.to_csv('train_set', encoding='utf-8', index=False)
         print("csv saved")
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#************************************************************************************************************
+    def create_dataframe(self,currentFrameNumber,frameTocheck):
+        cFrame = self.row_extractor_by_frameNumber(self.RTdf, 'frameNum', currentFrameNumber)
+        current_Rotation = cFrame[['rotation']].to_numpy()
+        current_translation = cFrame[['translation']].to_numpy()
+        currentGT = cFrame[['groundtruth']].to_numpy()
 
+        #print ('current Rotation = '),
+        #print (current_Rotation)
+
+        lFrame = self.row_extractor_by_frameNumber(self.RTdf, 'frameNum', frameTocheck)
+        last_Rotation = lFrame[['rotation']].to_numpy()
+        lastt_translation = lFrame[['translation']].to_numpy()
+        lastGT = lFrame[['groundtruth']].to_numpy()
+
+
+
+        ######ground truth difference
+        GT_diff = [lastGT[0][0][0] - currentGT[0][0][0], lastGT[0][0][1] - currentGT[0][0][1],
+                   lastGT[0][0][2] - currentGT[0][0][2]]
+        if GT_diff[0] == 0 and GT_diff[1] == 0 and GT_diff[2] == 0 and self.frame > 3:
+            lastFrame = self.RTdf[self.RTdf['frameNum'] == frameTocheck - 2]
+            lastGT = lastFrame[['groundtruth']].to_numpy()
+
+            GT_diff = [lastGT[0][0][0] - currentGT[0][0][0], lastGT[0][0][1] - currentGT[0][0][1],
+                       lastGT[0][0][2] - currentGT[0][0][2]]
+
+        imu_angular = [self.IMU[0].angular_velocity.x, self.IMU[0].angular_velocity.y, self.IMU[0].angular_velocity.z]
+        imu_linear = [self.IMU[0].linear_acceleration.x, self.IMU[0].linear_acceleration.y,
+                      self.IMU[0].linear_acceleration.z]
+        self.RT_IMU_GT_DF.loc[len(self.RT_IMU_GT_DF)] = [currentFrameNumber, current_Rotation,current_translation, imu_angular,
+                                                         imu_linear, GT_diff]
+    #*********************************************************************************************************************
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     def find_same_patches_in_both_camera(self):
         pass
 
@@ -85,18 +125,41 @@ class Hansel:
         #print("y =" ),
         #print(Y)
         return [X,Y]
-    def row_extractor_by_frameNumber(self,name_of_df_column,number_of_frame):
-        return self.df[self.df[name_of_df_column] == number_of_frame]
+    def row_extractor_by_frameNumber(self,df,name_of_df_column,number_of_frame):
+        return df[df[name_of_df_column] == number_of_frame]
 #############################################get pandas rows give be similar pairs
     def similarPatchsIn(self,currentFrameNumber,frameTocheck,df):
        # print(frameTocheck)
 
         #currentFrame1 = self.df[self.df['frameNum'] == currentFrameNumber]
-        currentFrame = self.row_extractor_by_frameNumber('frameNum',currentFrameNumber)
+        currentFrame = self.row_extractor_by_frameNumber(self.df,'frameNum',currentFrameNumber)
         #print (currentFrame)
         #print (currentFrame1)
         #lastFrame =self.df[self.df['frameNum'] == frameTocheck]
-        lastFrame = self.row_extractor_by_frameNumber('frameNum',frameTocheck)
+        lastFrame = self.row_extractor_by_frameNumber(self.df,'frameNum',frameTocheck)
+        ##################################3
+
+        cFrame = self.row_extractor_by_frameNumber(self.RTdf, 'frameNum', currentFrameNumber)
+        current_Rotation = cFrame[['rotation']].to_numpy()
+
+        #print ('current Rotation = '),
+        #print (current_Rotation)
+
+        lFrame = self.row_extractor_by_frameNumber(self.RTdf, 'frameNum', frameTocheck)
+        last_Rotation = lFrame[['rotation']].to_numpy()
+
+        #print ('last Rotation = '),
+        #print (last_Rotation)
+        #print ('diff =')
+        #print (last_Rotation-current_Rotation)
+       ##########################
+       ###########################
+       ###############################33
+
+
+        #print ('Translation = '),
+        #print (translation)
+       ##########################
         currentPatchs = currentFrame[['patch']].to_numpy()
         currentGT = currentFrame[['groundtruth']].to_numpy()
         #print ("gt = "),
@@ -104,11 +167,16 @@ class Hansel:
 
         lastPatchs = lastFrame[['patch']].to_numpy()
         lastGT = lastFrame[['groundtruth']].to_numpy()
+#################################
+       ############################33
+       ########################
+
 
         GT_diff = [lastGT[0][0][0] -currentGT[0][0][0],lastGT[0][0][1] -currentGT[0][0][1],lastGT[0][0][2] -currentGT[0][0][2]]
         if GT_diff[0]==0 and GT_diff[1]==0 and GT_diff[2]==0 and self.frame >3:
             lastFrame =self.df[self.df['frameNum'] == frameTocheck-2]
             lastGT = lastFrame[['groundtruth']].to_numpy()
+
             GT_diff = [lastGT[0][0][0] -currentGT[0][0][0],lastGT[0][0][1] -currentGT[0][0][1],lastGT[0][0][2] -currentGT[0][0][2]]
         #print ("gt = "),
         #print(GT_diff)
@@ -133,6 +201,8 @@ class Hansel:
         imu_angular = [self.IMU[0].angular_velocity.x,self.IMU[0].angular_velocity.y,self.IMU[0].angular_velocity.z]
         imu_linear = [self.IMU[0].linear_acceleration.x,self.IMU[0].linear_acceleration.y,self.IMU[0].linear_acceleration.z]
         #self.coordinateOf(currentFrameNumber-1,mostMatchs[0,1])
+        print ('imu_angular'),
+        print (imu_angular)
         #self.coordinateOf(currentFrameNumber,mostMatchs[0,0])
         #print(self.coordinateOf(currentFrameNumber,mostMatchs[0,0]))
         p1=[]
@@ -257,22 +327,19 @@ class Hansel:
                            #                    prob=0.999, threshold=3.0)
                 #points, R, t, mask = cv2.recoverPose(E, pts_l_norm, pts_r_norm)
 
-                print ('Rotation = '),
-                print (Rotation)
-                print ('Translation = '),
-                print (translation)
+                self.RTdf.loc[len(self.RTdf)] = [Rotation, translation, self.frame,self.groundtruth_for_frame]
 
 
 
                 ###############################################################################################33
-                for i in corners:
+               # for i in corners:
 
-                    x,y = i.ravel()
-                    if((x-4)>0 and (y-4)>0 and (x+4)<752 and (y+4)<480 ):
-                        pointNum +=1
-                        patch =self.img[y-self.patchsize:y+self.patchsize,x-self.patchsize:x+self.patchsize]
+                #    x,y = i.ravel()
+                 #   if((x-4)>0 and (y-4)>0 and (x+4)<752 and (y+4)<480 ):
+                  #      pointNum +=1
+                   #     patch =self.img[y-self.patchsize:y+self.patchsize,x-self.patchsize:x+self.patchsize]
                ####################put data in dataframe
-                        self.df.loc[len(self.df)] = [pointNum,x,y,patch.flatten(),Rotation,translation,self.frame,self.groundtruth_for_frame]
+                    #    self.df.loc[len(self.df)] = [pointNum,x,y,patch.flatten(),Rotation,translation,self.frame,self.groundtruth_for_frame]
 
 
 
@@ -280,7 +347,8 @@ class Hansel:
                 if (self.frame>0):
 
                     #self.find_same_patches_in_both_camera()
-                    self.similarPatchsIn(self.frame,self.frame-1,self.df)
+                    #self.similarPatchsIn(self.frame,self.frame-1,self.df)
+                    self.create_dataframe(self.frame,self.frame-1)
 
 
 
