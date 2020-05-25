@@ -60,10 +60,10 @@ class Hansel:
         rospy.Subscriber("/cam1/image_raw", Image, self.image_callbackr)
 
         rospy.Subscriber("/leica/position", PointStamped, self.ground_truth_callback)
-        rospy.Subscriber("/imu0", Imu, self.IMU_callback)
+        rospy.Subscriber("/imu1", Imu, self.IMU_callback)
         #rospy.Subscriber("/cam0/image_raw", Imu, self.image_callback)
     def savetoCSV(self):
-        self.RT_IMU_GT_DF.to_csv('test_set1', encoding='utf-8', index=False)
+        self.RT_IMU_GT_DF.to_csv('test_set11Hz', encoding='utf-8', index=False)
         print("csv saved")
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 #************************************************************************************************************
@@ -197,6 +197,8 @@ class Hansel:
 
                 if (self.frame>0):
                     self.create_dataframe(self.frame,self.frame-1)
+                    print(self.RT_IMU_GT_DF.loc[len(self.RT_IMU_GT_DF) - 1])
+
 
 
 
