@@ -1,14 +1,137 @@
 \begin{thebibliography}{}
 
-\bibitem[Moore and Lopes, 1999]{Moore99}
-Moore, R. and Lopes, J. (1999).
-\newblock Paper templates.
-\newblock In {\em TEMPLATE'06, 1st International Conference on Template
-  Production}. SCITEPRESS.
+\bibitem[Bloesch et~al., 2017]{rovio17}
+Bloesch, M., Burri, M., Omari, S., Hutter, M., and Siegwart, R. (2017).
+\newblock Iterated extended kalman filter based visual-inertial odometry using
+  direct photometric feedback.
+\newblock {\em The International Journal of Robotics Research},
+  36(10):1053--1072.
 
-\bibitem[Smith, 1998]{Smith98}
-Smith, J. (1998).
-\newblock {\em The Book}.
-\newblock The publishing company, London, 2nd edition.
+\bibitem[Bloesch et~al., 2015]{rovio15}
+Bloesch, M., Omari, S., Hutter, M., and Siegwart, R. (2015).
+\newblock Robust visual inertial odometry using a direct ekf-based approach.
+\newblock In {\em Intelligent Robots and Systems (IROS), 2015 IEEE/RSJ
+  International Conference on}, pages 298--304. IEEE.
+
+\bibitem[Bowman et~al., 2017]{bowman2017probabilistic}
+Bowman, S.~L., Atanasov, N., Daniilidis, K., and Pappas, G.~J. (2017).
+\newblock Probabilistic data association for semantic slam.
+\newblock In {\em Robotics and Automation (ICRA), 2017 IEEE International
+  Conference on}, pages 1722--1729. IEEE.
+
+\bibitem[Engel et~al., 2018]{engel2018direct}
+Engel, J., Koltun, V., and Cremers, D. (2018).
+\newblock Direct sparse odometry.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  40(3):611--625.
+
+\bibitem[Forster et~al., 2017]{forster2017svo}
+Forster, C., Zhang, Z., Gassner, M., Werlberger, M., and Scaramuzza, D. (2017).
+\newblock Svo: Semidirect visual odometry for monocular and multicamera
+  systems.
+\newblock {\em IEEE Transactions on Robotics}, 33(2):249--265.
+
+\bibitem[Gui et~al., 2015]{gui2015mems}
+Gui, P., Tang, L., and Mukhopadhyay, S. (2015).
+\newblock Mems based imu for tilting measurement: Comparison of complementary
+  and kalman filter based data fusion.
+\newblock In {\em Industrial Electronics and Applications (ICIEA), 2015 IEEE
+  10th Conference on}, pages 2004--2009. IEEE.
+
+\bibitem[Huang et~al., 2017]{huang2017visual}
+Huang, A.~S., Bachrach, A., Henry, P., Krainin, M., Maturana, D., Fox, D., and
+  Roy, N. (2017).
+\newblock Visual odometry and mapping for autonomous flight using an rgb-d
+  camera.
+\newblock In {\em Robotics Research}, pages 235--252. Springer.
+
+\bibitem[Julier and Uhlmann, 2004]{julier2004unscented}
+Julier, S.~J. and Uhlmann, J.~K. (2004).
+\newblock Unscented filtering and nonlinear estimation.
+\newblock {\em Proceedings of the IEEE}, 92(3):401--422.
+
+\bibitem[Leutenegger et~al., 2015]{leutenegger2015keyframe}
+Leutenegger, S., Lynen, S., Bosse, M., Siegwart, R., and Furgale, P. (2015).
+\newblock Keyframe-based visual--inertial odometry using nonlinear
+  optimization.
+\newblock {\em The International Journal of Robotics Research}, 34(3):314--334.
+
+\bibitem[Lynen et~al., 2013]{lynen2013robust}
+Lynen, S., Achtelik, M.~W., Weiss, S., Chli, M., and Siegwart, R. (2013).
+\newblock A robust and modular multi-sensor fusion approach applied to mav
+  navigation.
+\newblock In {\em Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ
+  International Conference on}, pages 3923--3929. IEEE.
+
+\bibitem[Mueggler et~al., 2017]{mueggler2017event}
+Mueggler, E., Rebecq, H., Gallego, G., Delbruck, T., and Scaramuzza, D. (2017).
+\newblock The event-camera dataset and simulator: Event-based data for pose
+  estimation, visual odometry, and slam.
+\newblock {\em The International Journal of Robotics Research}, 36(2):142--149.
+
+\bibitem[Mur-Artal et~al., 2015]{orb-slam1}
+Mur-Artal, R., Montiel, J. M.~M., and Tardos, J.~D. (2015).
+\newblock Orb-slam: a versatile and accurate monocular slam system.
+\newblock {\em IEEE Transactions on Robotics}, 31(5):1147--1163.
+
+\bibitem[Mur-Artal and Tard{\'o}s, 2017]{orb-slam2}
+Mur-Artal, R. and Tard{\'o}s, J.~D. (2017).
+\newblock Orb-slam2: An open-source slam system for monocular, stereo, and
+  rgb-d cameras.
+\newblock {\em IEEE Transactions on Robotics}, 33(5):1255--1262.
+
+\bibitem[Mur-Artal and Tardós, 2017]{7817784}
+Mur-Artal, R. and Tardós, J.~D. (2017).
+\newblock Visual-inertial monocular slam with map reuse.
+\newblock {\em IEEE Robotics and Automation Letters}, 2(2):796--803.
+
+\bibitem[Saska et~al., 2017]{saska2017system}
+Saska, M., Baca, T., Thomas, J., Chudoba, J., Preucil, L., Krajnik, T., Faigl,
+  J., Loianno, G., and Kumar, V. (2017).
+\newblock System for deployment of groups of unmanned micro aerial vehicles in
+  gps-denied environments using onboard visual relative localization.
+\newblock {\em Autonomous Robots}, 41(4):919--944.
+
+\bibitem[Schneider et~al., 2018]{schneider2018maplab}
+Schneider, T., Dymczyk, M., Fehr, M., Egger, K., Lynen, S., Gilitschenski, I.,
+  and Siegwart, R. (2018).
+\newblock maplab: An open framework for research in visual-inertial mapping and
+  localization.
+\newblock {\em IEEE Robotics and Automation Letters}, 3(3):1418--1425.
+
+\bibitem[Shi and Tomasi, 1993]{shi1993good}
+Shi, J. and Tomasi, C. (1993).
+\newblock Good features to track.
+\newblock Technical report, Cornell University.
+
+\bibitem[St-Pierre and Gingras, 2004]{st2004comparison}
+St-Pierre, M. and Gingras, D. (2004).
+\newblock Comparison between the unscented kalman filter and the extended
+  kalman filter for the position estimation module of an integrated navigation
+  information system.
+\newblock In {\em IEEE Intelligent Vehicles Symposium}, pages 831--835.
+  Citeseer.
+
+\bibitem[Sun et~al., 2018]{sun2018robust}
+Sun, K., Mohta, K., Pfrommer, B., Watterson, M., Liu, S., Mulgaonkar, Y.,
+  Taylor, C.~J., and Kumar, V. (2018).
+\newblock Robust stereo visual inertial odometry for fast autonomous flight.
+\newblock {\em IEEE Robotics and Automation Letters}, 3(2):965--972.
+
+\bibitem[Valencia and Andrade-Cetto, 2018]{valencia2018mapping}
+Valencia, R. and Andrade-Cetto, J. (2018).
+\newblock {\em Mapping, planning and exploration with Pose SLAM}.
+\newblock Springer.
+
+\bibitem[Wan and Van Der~Merwe, 2000]{wan2000unscented}
+Wan, E.~A. and Van Der~Merwe, R. (2000).
+\newblock The unscented kalman filter for nonlinear estimation.
+\newblock In {\em Adaptive Systems for Signal Processing, Communications, and
+  Control Symposium 2000. AS-SPCC. The IEEE 2000}, pages 153--158. Ieee.
+
+\bibitem[Zhou et~al., 2017]{zhou2017unsupervised}
+Zhou, T., Brown, M., Snavely, N., and Lowe, D.~G. (2017).
+\newblock Unsupervised learning of depth and ego-motion from video.
+\newblock In {\em CVPR}, volume~2, page~7.
 
 \end{thebibliography}
