@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2018.7.22)  22 JUN 2020 10:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2018.7.22)  22 JUN 2020 21:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -567,42 +567,141 @@ Underfull \hbox (badness 1057) in paragraph at lines 58--65
 
 LaTeX Warning: Citation `euroc' on page 3 undefined on input line 77.
 
-
-LaTeX Warning: Reference `fig:vio' on page 3 undefined on input line 80.
-
 <inconsistent.png, id=16, 1943.26pt x 1074.0125pt>
 File: inconsistent.png Graphic file (type png)
  <use inconsistent.png>
-Package pdftex.def Info: inconsistent.png used on input line 88.
+Package pdftex.def Info: inconsistent.png used on input line 90.
 (pdftex.def)             Requested size: 156.49014pt x 86.47995pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 
-(./Example.bbl
+<feature.jpg, id=17, 1101.25714pt x 388.88142pt>
+File: feature.jpg Graphic file (type jpg)
+ <use feature.jpg>
+Package pdftex.def Info: feature.jpg used on input line 107.
+(pdftex.def)             Requested size: 227.62204pt x 80.37393pt.
+
+Overfull \hbox (14.20761pt too wide) in paragraph at lines 107--108
+[][] 
+ []
+
+
+LaTeX Warning: Citation `luong1996fundamental' on page 3 undefined on input lin
+e 121.
+
+
+LaTeX Warning: Citation `hartley2003multiple' on page 3 undefined on input line
+ 122.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 124.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 124.
+
+LaTeX Warning: Citation `nister2004efficient' on page 3 undefined on input line
+ 128.
+
+[3 <./inconsistent.png> <./feature.jpg>]
+<flowchart.png, id=22, 627.09282pt x 357.58594pt>
+File: flowchart.png Graphic file (type png)
+ <use flowchart.png>
+Package pdftex.def Info: flowchart.png used on input line 149.
+(pdftex.def)             Requested size: 156.49014pt x 89.23256pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+<Rasp.JPG, id=23, 619.113pt x 484.209pt>
+File: Rasp.JPG Graphic file (type jpg)
+ <use Rasp.JPG>
+Package pdftex.def Info: Rasp.JPG used on input line 178.
+(pdftex.def)             Requested size: 241.84842pt x 189.14366pt.
+
+Overfull \hbox (28.43399pt too wide) in paragraph at lines 178--179
+[][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `euroc' on page 4 undefined on input line 221.
+
+
+Underfull \hbox (badness 1127) in paragraph at lines 221--222
+[]\OT1/ptm/m/n/10 Figure 5[] - 7[], we can see va-ri-ety of es-ti-ma-
+ []
+
+<X.png, id=24, 755.82375pt x 518.6878pt>
+File: X.png Graphic file (type png)
+ <use X.png>
+Package pdftex.def Info: X.png used on input line 226.
+(pdftex.def)             Requested size: 256.0748pt x 175.73418pt.
+
+Overfull \hbox (42.66037pt too wide) in paragraph at lines 226--227
+[][] 
+ []
+
+<Y.png, id=25, 755.07094pt x 515.67656pt>
+File: Y.png Graphic file (type png)
+ <use Y.png>
+Package pdftex.def Info: Y.png used on input line 232.
+(pdftex.def)             Requested size: 256.0748pt x 174.88707pt.
+
+Overfull \hbox (42.66037pt too wide) in paragraph at lines 232--233
+[][] 
+ []
+
+<Z.png, id=26, 753.5653pt x 523.9575pt>
+File: Z.png Graphic file (type png)
+ <use Z.png>
+Package pdftex.def Info: Z.png used on input line 238.
+(pdftex.def)             Requested size: 256.0748pt x 178.04726pt.
+
+Overfull \hbox (42.66037pt too wide) in paragraph at lines 238--239
+[][] 
+ []
+
+<vio_sensor.jpg, id=27, 4047.12pt x 1967.35pt>
+File: vio_sensor.jpg Graphic file (type jpg)
+ <use vio_sensor.jpg>
+Package pdftex.def Info: vio_sensor.jpg used on input line 247.
+(pdftex.def)             Requested size: 256.0748pt x 124.46004pt.
+
+Overfull \hbox (42.66037pt too wide) in paragraph at lines 247--248
+[][] 
+ []
+
+[4 <./flowchart.png (PNG copy)> <./Rasp.JPG>] (./Example.bbl [5 <./X.png (PNG c
+opy)> <./Y.png (PNG copy)> <./Z.png (PNG copy)> <./vio_sensor.jpg>]
+Underfull \vbox (badness 1675) has occurred while \output is active []
+
+
+Underfull \vbox (badness 1675) has occurred while \output is active []
+
+ [6]
 Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no ³ in font ptmr7t!
- [3 <./inconsistent.png>]) [4
-
-] (./Example.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+)
+[7] (./Example.aux) ) 
 Here is how much of TeX's memory you used:
- 4813 strings out of 493304
- 71134 string characters out of 6139871
- 140975 words of memory out of 5000000
- 8149 multiletter control sequences out of 15000+600000
- 41390 words of font info for 91 fonts, out of 8000000 for 9000
+ 4897 strings out of 493304
+ 72198 string characters out of 6139871
+ 142078 words of memory out of 5000000
+ 8219 multiletter control sequences out of 15000+600000
+ 54419 words of font info for 120 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  59i,7n,94p,1117b,322s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmri8a.pfb>
-Output written on Example.pdf (4 pages, 917588 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
+}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/urw/times/utmri8a.pfb>
+Output written on Example.pdf (7 pages, 3318958 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 60 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

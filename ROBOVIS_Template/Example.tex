@@ -79,6 +79,8 @@ Although, There are several datasets that contains ground truth in 6 degree of f
  our perception is based on the aforementioned Rovio \cite{rovio17}, and integrate it to IMU data.  Instead of using iterated Extended Kalman Filter, we are going to take advantage of supervised Learning  to create trajectory.
  Although, our method cannot show the result as accurately as Rovio, we offer benefit of having more robustness to latency inconsistency in devices such as the one show in Figure \ref{fig:vio} which has received in a progress without pattern that we see in Figure \ref{fig:incons}. 
  
+ In our approach, we create reliable algorithm which can give function better than other approach when we have latency.
+ 
 
 
 
@@ -89,8 +91,173 @@ Although, There are several datasets that contains ground truth in 6 degree of f
   \caption{Data that received by our Visual inertial sensor.}
   \label{fig:incons}
  \end{figure}
+ % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+ % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+ % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+ 
+ 
+ 
+ \section{Method}
+ In order to have a flexible algorithm which can neglect inconsistency of delivered data, we create an algorithm that receives data in an uncertain environment. Our method divided to four steps:finding landmarks, tracking best matches of sequenced frames, finding robocenteric differentiation in distance, Fusion Data, and learning them. 
+ 
+ \subsection{Finding Landmarks}
+ In every dataset, it is extremely hard and complex to use all data. In addition, It is too time consuming to have all the pixels as data for video or sequence images.Thus, we need to extract features. Harris is one of the most popular feature extractors that finds corners \cite{harris1988combined}. We use Shi-Tomasi \cite{shi1993good} which down-sample the region of interest to have more robustness for noisy images\cite{rovio17}.
+ Figure \ref{fig:featuret} shows the extracte features that are circumscribed by patches.
+ \begin{figure}
+ \includegraphics[width=80mm]{feature.jpg}
+   \caption{The right image has the features that has rectangle around it and the left is the features which are extracted}
+   \label{fig:featuret}
+ \end{figure}
+ 
+ 
+ 
+ 
+ 
+ \subsection{Tracking The Best Matching Features}
+ 
+ Based on the fact that the Features are unique in each image, it is worth thinking about the challenge of finding associated landmarks  in two consecutive frames. In the approach that we pursue, we create a patch around all of points of interest and flatten them to see them as  vectors. Manhattan distance was our choice to find the similar matches. These matches are sorted and the difference between coordinates of best points of interests. 
+ To Normalize data, we insert both the difference of coordinates in each row as well as distance in position of tracked features in a data-frame.
+ \subsection{Computing Rotation and Transformation }
+ We do the Visual Odometry ignoring the presence of Inertial Measurement Unit. in this section we create a Fundamental matrix \cite{luong1996fundamental} based on the tracked points. 
+ The fundamental matrix extract the key points that can give us all information about matching point. This process needs Extrinsics and Intrinsics of the camera in order to give us Epipolar Geometry.\cite{hartley2003multiple} 
+ In the following equation we can compute Fundamental Matrix:
+ \begin{equation}\label{eq1}
+ {\mathbf  {x}}'^{{\top }}{\mathbf  {Fx}}=0
+ \end{equation} 
+ x and x' are the vector of landmarks and F is fundamental matrix. 
+ To find out the distance of the landmarks and Epipolar Geometry is not enough. we need to have Essential Matrix to decompose Rotation and transformation based on that. This is the equation that tells us how to compute Essential Matrix\cite{nister2004efficient} :
+  \begin{equation}\label{eq2}
+  {\displaystyle \mathbf {E} =({\mathbf {K} '})^{\top }\;\mathbf {F} \;\mathbf {K} }
+  \end{equation}
+  K and K' is intrinsic of each camera. 
+  Essential Matrix consist of Rotation and Translation.Singular Value Decomposition can compute rotation and translation our stereo visual sensor. 
+  
+ 
+ \subsection{Fusion Data}
+ 
+ To do visual inertial odometry, we add linear acceleration and angular velocity from Inertial Measurement unit. These data should come together at once. However, there is some latency or difference in frequency in receiving data. To overcome this issue, we proposed a blackboard semi design pattern. 
+ In other words, we put all data in global variables and those data that should be used for process will be grabbed by an specific function at the same time.Using this approach we will not have any missing value due to  having multi thread callback functions that update the data from stream which can be come from a robot or a Ros-bag.
+ 
+ In other words, as shown in Figure \ref{fig:Flowchart} we have an algorithm that collect data from Ros-bag topic, and extract features and important data from images and IMU data. In the next step these valuable information will be shared with machine learning function.
+  
+ 
+ \subsection{Supervised learning approach}
+ We defined a laser data  that put on devices as a ground truth  (Target variable). Our plan is to estimate the position of Visual Inertial Odometry Sensor  via learning. As we see in \ref{Error_table} the linear regression can offer less Root Mean Square error.
+ 
+ \begin{figure}[!h]
+   \centering
+    {\epsfig{file =flowchart.png, width = 5.5cm}}
+   \caption{ROS Topics are streams that convey messages. These messages can be images, texts, or data-structures such as Dictionaries. Callback functions will be run in a loop automatically and put messages from topics in global variables. data will be collected by a preprocessor function. Then Processed data will be shared with the machine learning method.}
+   \label{fig:Flowchart}
+  \end{figure}
+  
+ 
+ 
+ % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+ % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{Experimental Result}
+The purpose of this research is  finding the coordinate of the robot regardless of the accuracy and consistency of the latency in Visual Inertial Odometry Sensor.
+Figure \ref{fig:rasp} shows the captured data received by the device that we have built ourselves (Figure \ref{fig:vio}). As we can see that the latency is not consistent.
+We used Robotic Operating System to make sure that Callback functions can work parallel with main function. In addition, we used KNIME in order to create plots and extract errors. The whole algorithm can work in a regular laptop. All codes has been written in Python 2.7. The image processing algorithms are using OpenCV2 libraries. 
+ We tried several regression algorithms:
+\begin{itemize}
+\item Simple Regression Tree (SRT)
+\item Gradient Boosted Trees Regression (GBT)
+\item Random Forest Regression (RFR)
+\item Linear Regression (LR)
+\item Polynomial Regression (PR)
+
+\end{itemize}
+
+All of these algorithms resulted in approximately similar error. Root measure square error was our manifest measurement we had tow candidates , Linear Regression and Polynomial Regression. Between these two linear regression had less Mean absolute error.
+We tested linear regression with our data and its ground truth for three columns that we can see in Figure \ref{fig:X} - \ref{fig:Z}.
+ 
+\begin{figure}
+
+  \includegraphics[width=85mm]{Rasp.JPG}
+  \caption{Rate of receiving data by Visual inertial Odometry Sensor  }
+  \label{fig:rasp}
+\end{figure} 
 
 
+
+\begin{table}[h]
+
+
+\caption{These Errors are obtained from Different regressions which can define best algorithms for Learning the position}
+\label{Error_table}
+\begin{center}
+\begin{small}
+
+
+\begin{tabular}{|c||c||c||c||c||c|}
+\hline
+& SRT & GBT & RFR & LR & PR\\
+\hline
+\hline
+MAE  & 0.085 & 0.076 & 0.073 & 0.071 & 0.072 \\
+\hline
+
+MSE  & 0.02 & 0.017 & 0.016 & 0.014 & 0.014 \\
+
+\hline
+RMSE  & 0.02 & 0.017 & 0.016 & 0.014 & 0.014 \\
+\hline
+
+
+\end{tabular}
+
+\end{small}
+\end{center}
+
+\end{table}
+
+
+
+
+   
+
+Figure \ref{fig:X} - \ref{fig:Z},  we can see variety of estimations compared to ground truth in position, rotation Angular-velocity and linear-velocity. These estimations are obtained by linear Regression algorithm and Dataset for this experiment is gained from EuroC Dataset \cite{euroc}. 
+
+
+\begin{figure}
+
+  \includegraphics[width=90mm]{X.png}
+  \caption{Estimation error of our methods:  difference of Machine learning output compared to ground truth for target X. }
+  \label{fig:X}
+\end{figure}
+\begin{figure}
+
+  \includegraphics[width=90mm]{Y.png}
+  \caption{Estimation error of our methods:  difference of Machine learning output compared to ground truth for target Y. }
+  \label{fig:Y}
+\end{figure}
+\begin{figure}
+
+  \includegraphics[width=90mm]{Z.png}
+  \caption{Estimation error of our methods:  difference of Machine learning output compared to ground truth for target X. }
+  \label{fig:Z}
+\end{figure}
+
+
+
+\begin{figure}
+
+  \includegraphics[width=90mm]{vio_sensor.jpg}
+  \caption{Visual Inertial Odometry Sensor. This sensor has Global Shutter Cameras which take each frame after receiving 10 message from Inertial Measurement Unit by having external trigger. This device is 50 times cheaper than the high precision identical device. and also has the ability to process data since it has a Raspberry pi 3 on it. }
+  \label{fig:vio}
+\end{figure}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{CONCLUSIONS}
+
+One of the biggest challenges for our proposed approach was to create a method that can work with every devices without  a need  for calibration as well as handling cheap and high latency devices. Our results shows that machine learning can manipulate data regardless inconsistency and other unknown  hardship of uncertainty in data collection. In Other words we obtain visual inertial models better than other approaches in a way that it is robust to latency in recieving data from Inertial Measurment Unit(IMU).
+
+In future, We are planning to reduce the error and also use our algorithm on new unknown devices. We will also use it on mobile phones in order to have less dependency on GPS when it comes to be in GPS-free places.
+Next step will be using the distance of the landmarks to the robot in order to normalize and have better results from perception module of our algorithm.
+\addtolength{\textheight}{-12cm} 
 
 \bibliographystyle{apalike}
 {\small

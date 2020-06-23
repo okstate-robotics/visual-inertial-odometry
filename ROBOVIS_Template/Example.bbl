@@ -38,6 +38,12 @@ Gui, P., Tang, L., and Mukhopadhyay, S. (2015).
 \newblock In {\em Industrial Electronics and Applications (ICIEA), 2015 IEEE
   10th Conference on}, pages 2004--2009. IEEE.
 
+\bibitem[Harris et~al., 1988]{harris1988combined}
+Harris, C.~G., Stephens, M., et~al. (1988).
+\newblock A combined corner and edge detector.
+\newblock In {\em Alvey vision conference}, volume~15, pages 10--5244.
+  Citeseer.
+
 \bibitem[Huang et~al., 2017]{huang2017visual}
 Huang, A.~S., Bachrach, A., Henry, P., Krainin, M., Maturana, D., Fox, D., and
   Roy, N. (2017).

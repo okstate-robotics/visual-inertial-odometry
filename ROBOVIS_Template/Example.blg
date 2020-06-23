@@ -6,46 +6,50 @@ Database file #1: example.bib
 Warning--I didn't find a database entry for "cadena2016past"
 Warning--I didn't find a database entry for "mars-rover-slam"
 Warning--I didn't find a database entry for "euroc"
+Warning--I didn't find a database entry for "luong1996fundamental"
+Warning--I didn't find a database entry for "hartley2003multiple"
+Warning--I didn't find a database entry for "nister2004efficient"
+Warning--can't use both volume and number fields in harris1988combined
 Warning--can't use both volume and number fields in zhou2017unsupervised
-You've used 22 entries,
+You've used 23 entries,
             1935 wiz_defined-function locations,
-            597 strings with 8256 characters,
-and the built_in function-call counts, 11167 in all, are:
-= -- 1113
-> -- 521
-< -- 16
-+ -- 188
-- -- 182
-* -- 975
-:= -- 1841
-add.period$ -- 73
-call.type$ -- 22
-change.case$ -- 201
-chr.to.int$ -- 22
-cite$ -- 23
-duplicate$ -- 409
-empty$ -- 746
-format.name$ -- 218
-if$ -- 2245
+            608 strings with 8458 characters,
+and the built_in function-call counts, 11721 in all, are:
+= -- 1171
+> -- 539
+< -- 18
++ -- 196
+- -- 188
+* -- 1020
+:= -- 1924
+add.period$ -- 77
+call.type$ -- 23
+change.case$ -- 208
+chr.to.int$ -- 23
+cite$ -- 25
+duplicate$ -- 434
+empty$ -- 787
+format.name$ -- 225
+if$ -- 2364
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 22
-newline$ -- 113
-num.names$ -- 66
-pop$ -- 196
+missing$ -- 23
+newline$ -- 118
+num.names$ -- 69
+pop$ -- 204
 preamble$ -- 1
-purify$ -- 201
+purify$ -- 208
 quote$ -- 0
-skip$ -- 313
+skip$ -- 333
 stack$ -- 0
-substring$ -- 840
-swap$ -- 95
-text.length$ -- 9
+substring$ -- 884
+swap$ -- 105
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 130
-warning$ -- 1
-while$ -- 89
+type$ -- 136
+warning$ -- 2
+while$ -- 94
 width$ -- 0
-write$ -- 295
-(There were 4 warnings)
+write$ -- 310
+(There were 8 warnings)
